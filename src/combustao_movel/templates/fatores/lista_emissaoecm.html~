@@ -1,0 +1,32 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/combustao_movel/adiciona_emissaoecm/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Fatores de Emissão por Combustão Móvel</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    		
+			<a href="/combustao_movel/remove_emissaoecm/{{item.id}}">
+		    <img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			
+			Combustivel.:{{item.combustivel}} | Fator de Emissão de CO2.: {{item.fatorco2}} | Tipo.:{{item.tipo}}
+			
+	</li>
+
+{%empty%}
+	<li>Nenhum Fator de ECM</li>
+{%endfor%}
+</ul>
+{%endblock content%}

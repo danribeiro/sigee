@@ -1,0 +1,31 @@
+
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/inicia_inventario/">Voltar</a></li>
+			
+			<li><a href="/compra_vapor/adiciona_fonte/">Combustíveis</a></li>
+			<li><a href="/compra_vapor/adiciona_fonteecv/">Relatar Emissão por Compra de Vapor</a></li>			
+		
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+	
+	
+	<h3> Emissões por Compra de Vapor</h3>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="Cadastrar ECV" class="button">
+	</form></br>
+	
+
+{% endblock content %}

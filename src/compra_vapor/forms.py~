@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+from django import forms
+from django.forms.models import ModelForm
+from compra_vapor.models import *
+
+class FormECV(forms.ModelForm):
+	class Meta:
+		model=ECV
+		fields=('inventario',)
+
+class FormFonteECV(forms.ModelForm):
+	registro=forms.CharField(max_length=50,required=False)
+	descricao=forms.CharField(max_length=75,required=False)
+	class Meta:
+		model=FonteECV
+		fields=('ecv','registro','descricao','fonte_emissao','vapor','fervedor')
+		
+		
+class FormFonteEmissaoECV(forms.ModelForm):
+	class Meta:
+		model=FonteEmissaoECV
+ 	

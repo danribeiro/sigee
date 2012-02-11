@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+from django.db import models
+
+
+# Create your models here.
+
+
+
+
+class FonteEmissao(models.Model):
+    TIPO_CHOICES=(
+        (1, 'biomassa'),
+        (2, 'fossil'),
+    )
+    nome = models.CharField(u'Nome da fonte de emissão', max_length = 100)
+    ef_co2 = models.FloatField(u'Coeficiente de emissão de CO2')
+    unidade = models.CharField(u'Unidade de medida', max_length=20)
+    tipo = models.IntegerField(u'Tipo de fonte', choices=TIPO_CHOICES)
+   
+           
+    def __unicode__(self):
+        return unicode(self.nome)
+    def get_absolute_url(self):
+        return '/fontes/fonte_emissao/%d/'%self.nome
+    
+       
+class SetorAtividade(models.Model):
+    nome = models.CharField(u'Nome do setor', max_length=100)
+    fonte_emissao = models.ManyToManyField(FonteEmissao, through='EfSetor')
+	
+    def __unicode__(self):
+        return unicode(self.nome)
+        
+        
+
+class EfSetor(models.Model):
+    fonte_emissao = models.ForeignKey(FonteEmissao, verbose_name = u'Fonte de emissão')
+    setor_atividade = models.ForeignKey(SetorAtividade, verbose_name = u'Setor de atividade')
+    ef_ch4 = models.FloatField(u'Coeficiente de Emissão de CH4')
+    ef_n2o = models.FloatField(u'Coeficiente de Emissão de N2O')
+    
+       
+    def __unicode__(self):
+    	return unicode(self.setor_atividade)
+    	
+
+
+
+

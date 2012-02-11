@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p><a href ="/adiciona/" >Adicionar nova fonte</a></p>
+<ul>
+{%for item in lista_itens %}
+	
+		<a href="/item/{{item.id}}">
+			Nome: {{item.nome}}  Coeficiente: {{item.ef_co2}} </a>
+	</li>
+{%empty%}
+	<li>Sem itens na lista</li>
+{%endfor%}
+</u>
+{% endblock content %}

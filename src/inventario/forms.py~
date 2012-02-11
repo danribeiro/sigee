@@ -1,0 +1,33 @@
+#-*- coding:  utf-8 -*-
+
+from django.forms.models import ModelForm
+from django import forms
+from inventario.models import *
+from inventario.validators import CePValidator
+
+class FormEmpresa(forms.ModelForm):
+	complemento = forms.CharField(max_length = 10, required=False)
+	cep=forms.CharField(max_length=8,min_length=8, validators=[CePValidator])		
+	class Meta:
+		model=Empresa	
+		fields=('nome','rua','numero','complemento','bairro','cep','cidade','estado')
+		
+		
+class FormInventario(forms.ModelForm):	
+	class Meta:	
+		model=Inventario
+		fields=('ano','empresa')	
+	
+		
+class FormCED(forms.ModelForm):
+	class Meta:
+		model=CED
+		fields=('inventario','setor_atividade')		
+	
+class FormFonteCED(forms.ModelForm):
+	registro_fonte=forms.CharField(required=False)
+	descricao_fonte=forms.CharField(required=False)
+	class Meta:
+		model=FonteCED
+		fields=('fonte_emissao','quantidade','registro_fonte','descricao_fonte','ced')
+

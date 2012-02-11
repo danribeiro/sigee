@@ -1,0 +1,26 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<hr>
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/combustao_movel/lista_fator/">Listar Fatores Variáveis</a></li>
+			<li><a href="/combustao_movel/adiciona_param/"> Adicionar Parâmetros</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+
+	<h3>Fatores Variáveis</h3>
+	<form action ="" method ="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<button type="submit">Cadastrar Fatores Variáveis</button>
+	</form>
+			
+{%endblock content%}

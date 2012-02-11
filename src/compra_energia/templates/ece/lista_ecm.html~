@@ -1,0 +1,30 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_energia/adiciona_ece/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Emissões Combustão Móvel</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    		
+			Inventário.: {{item.inventario}} 
+				<a href="/compra_energia/calcula_ece/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/calcular.png"/>
+			</a>
+	</li>
+
+{%empty%}
+	<li>Nenhum Relato de Emissão</li>
+{%endfor%}
+</ul>
+{%endblock content%}

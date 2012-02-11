@@ -1,0 +1,32 @@
+
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/inicia_inventario/">Voltar</a></li>
+			
+			<li><a href="/emissao_rac/adiciona_gas/">Gases</a></li>
+			<li><a href="/emissao_rac/adiciona_equip/">Equipamentos</a></li>
+			<li><a href="/emissao_rac/adiciona_fonterac/">Relatar Emissão por R&AC</a></li>			
+		
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+	
+	
+	<h3> Emissões por Equipamentos de Refrigeração e Ar-Condicionado</h3>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="Cadastrar RAC" class="button">
+	</form></br>
+	
+
+{% endblock content %}

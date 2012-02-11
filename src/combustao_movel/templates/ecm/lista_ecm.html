@@ -1,0 +1,35 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/combustao_movel/adiciona_fonteecm/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Emissões Combustão Móvel</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    
+			<a href="/combustao_movel/calcula_ecm/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/calcular.png"/>
+			</a>
+			
+			<a href="/combustao_movel/edita_ecm/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>		
+			Inventário.: {{item.inventario}} 
+				
+	</li>
+
+{%empty%}
+	<li>Nenhum Relato de Emissão</li>
+{%endfor%}
+</ul>
+{%endblock content%}

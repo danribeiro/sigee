@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/fonte_emissao/adiciona_setor/">voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+
+<h3>Lista Setores de Atividade</h3>
+<ul>
+{%for item in lista_itens %}
+	
+	<li>
+		<a href="/fonte_emissao/remove_setor/{{item.id}}">
+			<img src="{{STATIC_URL}}image/delete.png">
+		</a>
+		<a href="/fonte_emissao/edita_setor/{{item.id}}">
+			<img src="{{STATIC_URL}}image/editar.png">
+		</a>
+		{{item.nome}} 	
+		
+		
+		
+		
+				
+	</li>
+	
+{%empty%}
+	<li>Nenhum Setor de Atividade</li>
+{%endfor%}
+</ul>
+{% endblock content %}

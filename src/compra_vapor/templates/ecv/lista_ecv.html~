@@ -1,0 +1,37 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_vapor/adiciona_ecv/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Emissão por Compra de Vapor</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    
+			<a href="/compra_vapor/calcula_ecv/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/calcular.png"/>
+			</a>	
+			<a href="/compra_vapor/remove_ecv/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/compra_vapor/edita_ecv/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>	
+			    Inventário.: {{item.inventario}} 
+				
+	</li>
+
+{%empty%}
+	<li>Nenhum ECV</li>
+{%endfor%}
+</ul>
+{%endblock content%}

@@ -1,0 +1,85 @@
+# Create your views here.
+#-*- coding:utf-8 -*-
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+from forms import FormEmpresa, FormInventario, FormCED, FormFonteCED
+from django.http import HttpResponse, HttpResponseRedirect
+from inventario.models import Empresa, CED, Inventario
+
+
+
+ #######################################################################################################################################
+def adiciona_empresa(request):
+	if request.method=='POST':
+		form=FormEmpresa(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+			return render_to_response('empresa/add_empresa.html',{'form':form},context_instance=RequestContext(request))
+	else:
+		form=FormEmpresa()				
+	return render_to_response('empresa/add_empresa.html',{'form':form},context_instance=RequestContext(request))
+#######################################################################################################################################
+def exclui_empresa(request,nr_item):
+	item=get_object_or_404(Empresa, pk=nr_item)
+	item.delete()
+	return render_to_response('empresa/lista.html',context_instance=RequestContext(request))
+#######################################################################################################################################	
+	
+def lista_empresa(request):
+	lista_itens=Empresa.objects.all()
+	context=RequestContext(request)
+	return render_to_response('empresa/lista.html',{'lista_itens':lista_itens},context)
+	
+#######################################################################################################################################
+
+def item(request, nr_item):
+	item = get_object_or_404(Empresa, pk=nr_item)
+	return render_to_response('empresa/item.html',{'item':item},context_instance=RequestContext(request))
+#######################################################################################################################################
+
+def inicia_inventario(request):	
+	if request.method=='POST':
+		form=FormInventario(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+			return render_to_response('inventario/inventario_ok.html',{'form':form},context_instance=RequestContext(request))
+	else:
+		form=FormInventario()
+	return render_to_response('inventario/inventario_ok.html',{'form':form}, context_instance=RequestContext(request))
+
+#######################################################################################################################################		
+
+def adiciona_ced(request):
+	if request.method=='POST':
+		form=FormCED(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+			return render_to_response('ced/add_ced.html',{'form':form},context_instance=RequestContext(request))
+	else:
+		form = FormCED()
+	return render_to_response('ced/add_ced.html',{'form':form},context_instance=RequestContext(request))
+
+#######################################################################################################################################		
+	
+def adiciona_FonteCED(request):
+	if request.method=='POST':		
+		form=FormFonteCED(request.POST)
+		if form.is_valid():
+			form.save()
+			return render_to_response('ced/add_FonteCED.html',{'form':form},context_instance=RequestContext(request))
+	else:
+		form=FormFonteCED()
+	return render_to_response('ced/add_FonteCED.html',{'form':form},context_instance=RequestContext(request))
+	
+
+#######################################################################################################################################
+
+def calcula_ced(request):
+	qs=FonteCED.objects.all()
+	for emissao in qs:
+		total_ef_co2=emissao.fonteced.ef_co2
+		total_ef_nh4=emissao.fonteced.ef_nh4
+		total_ef_no2=emissao.fonteced.ef_no2
+	return HttpResponse('total_ef_co2','total_ef_nh4','total_ef_nh4')
+	
+

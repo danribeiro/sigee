@@ -1,0 +1,30 @@
+{%extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/lista_inventario">Listar Inventários</a></li>
+			<li><a href="/inventario/adiciona_ced">Combustão Estacionária</a></li>
+			<li><a href="/combustao_movel/adiciona_ecm/">Combustão Móvel</a></li>
+			<li><a href="/emissao_rac/adiciona_rac/">Refrigeradores & Ar-condicionado</a></li>
+			<li><a href="/compra_energia/adiciona_ece/">Compra de Energia</a></li>
+			<li><a href="">Compra de Vapor</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %} 	
+ 	
+    <h3>Inventário</h3>
+	<form action ="" method ="post">
+		{%csrf_token%}
+		{{form.as_p}}
+		<button type="submit"> Criar Inventário</button>
+	</form>	
+	
+{% endblock content %}
+

@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+		    <li><a href="/fonte_emissao/lista_setor/">Listar Setores</a></li>
+			<li><a href="/fonte_emissao/adiciona_ef/">Adicionar Fatores NH4/N2O</a></li>
+			
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+	
+	<h3>Setor de Atividade</h3>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	{{form1.as_p}}
+	<input type="submit" value="Cadastrar Setor de Atividade" class="button">
+	
+	</form>
+ 	
+ 	
+{% endblock content %}

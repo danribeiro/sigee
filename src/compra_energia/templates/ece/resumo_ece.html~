@@ -1,0 +1,47 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_energia/adiciona_fonteece/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+<ul>
+	<ul>
+		<h3>	Resumo ECE - Emissão por compra de energia elétrica </h3>
+		<h3> 	Total de emissões por compra de energia elétrica	</h3>		 		 
+		<table border=1 >
+		<tr>
+		<td>  </td> 										  <td>       CO2(ton)        </td>
+		</tr>
+		<tr>
+		<td> Emissões totais de CO2.: </td> <td>{{totalco2}} </td> 
+		</tr>
+		
+		</table>
+		
+		_________________________________________________________________________</br></br>		
+		  
+		 <table border=1 >
+		
+		<tr>
+		<td bgcolor='blue'> Emissões  Totais de CO2 - Equivalente (toneladas métricas) .: </td> <td bgcolor='blue'><strong> {{emissoes_equivalentes}}  </strong> </td>
+		</tr>
+		</table>
+		</br></br>
+		<a  href =""> <input type="submit" value="Salvar Resultado" class="button"></a></p>
+
+		 
+		 
+
+{%endblock content%}
+

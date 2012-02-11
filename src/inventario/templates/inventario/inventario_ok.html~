@@ -1,0 +1,28 @@
+{%extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="{%url inventario:adiciona_ced%}">Estacionária</a></li>
+			<li><a href="">Móvel</a></li>
+			<li><a href="">R&AC</a></li>
+			<li><a href="">Compra de Energia</a></li>
+			<li><a href="">Compra de Vapor</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %} 	
+ 	
+    <h2>Inventário</h2>
+	<form action ="" method ="post">
+		{%csrf_token%}
+		{{form.as_p}}
+		<button type="submit"> Adicionar</button>
+	</form>	
+{% endblock content %}
+

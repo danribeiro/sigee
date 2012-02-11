@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{%load adminmedia%}
+{%block extrahead%}
+	<script type="text/javascript" src="{% admin_media_prefix %}js/inlines.min.js" ></script>	
+	<script type="text/javascript" src="{% admin_media_prefix %}js/jquery.min.js" ></script>
+	<script type="text/javascript" src="{% admin_media_prefix %}js/core.js" ></script>
+	<script type="text/javascript" src="{% admin_media_prefix %}js/actions.min.js" ></script>	
+ 		
+ 		
+ 	
+ 	{%endblock%}
+{% block content %}
+
+	<h1>Nova Empresa</h1>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{ form1.as_p }}
+	{{ form2.as_p }}
+	{{ form3.as_p }}
+
+	
+	<input type="submit" value="adicionar!" class="button">
+	</form>
+
+{% endblock content %}

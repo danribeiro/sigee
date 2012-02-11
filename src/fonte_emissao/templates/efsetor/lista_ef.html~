@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/fonte_emissao/adiciona_ef/">voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+
+<h3>Lista de Fatores CH4/N2O por Setor</h3>
+<ul>
+{%for item in lista_itens %}	
+	<li>
+		<a href="/fonte_emissao/remove_ef/{{item.id}}">
+		<img src="{{STATIC_URL}}image/delete.png">
+		</a> 
+		<a href="/fonte_emissao/edita_ef/{{item.id}}">
+		<img src="{{STATIC_URL}}image/editar.png">
+		</a> 		
+		{{item.setor_atividade}} | {{item.fonte_emissao}} | EF_NH4: {{item.ef_ch4}} | EF_N2O: {{item.ef_n2o}}						
+			
+				
+	</li>
+	
+{%empty%}
+	<li>Nenhum Fator NH4/N2O </li>
+{%endfor%}
+</ul>
+{% endblock content %}

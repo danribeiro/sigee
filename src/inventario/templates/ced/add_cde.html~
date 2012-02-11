@@ -1,0 +1,26 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="{% url inventario:adiciona_empresa %}">Adiciona Empresa</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+	
+	<h2>Emissões por Combustão estacionária</h2>
+	<form action ="" method ="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<button type="submit"> Adicionar</button>
+	</form>
+	
+		
+{%endblock content%}

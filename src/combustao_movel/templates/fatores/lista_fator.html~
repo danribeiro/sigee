@@ -1,0 +1,35 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/combustao_movel/adiciona_fator/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Fatores Variáveis</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    		
+			<a href="/combustao_movel/remove_fator/{{item.id}}">
+		    <img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/combustao_movel/edita_fator/{{item.id}}">
+		    <img src="{{STATIC_URL}}image/editar.png"/>
+			</a>
+			
+			ECM.:{{item.ecm}} | Mês.: {{item.mes}} do Ano de {{item.get_ano_param_display}}
+			
+	</li>
+
+{%empty%}
+	<li>Nenhum Fator Variável</li>
+{%endfor%}
+</ul>
+{%endblock content%}

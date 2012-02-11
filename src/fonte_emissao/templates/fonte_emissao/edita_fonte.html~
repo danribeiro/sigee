@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/fonte_emissao/lista_fonte/">Listar Fontes de Emissão</a></li>
+			<li><a href="/fonte_emissao/adiciona_setor/">Adicionar Setor de Atividade</a></li>			
+			<li><a href="/fonte_emissao/adiciona_ef/">Adicionar fatores de CH4/N2O</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+		
+	<h3>Fonte Emissão</h3>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="Atualizar Fonte Emissão" class="button">
+	</form></br>
+	
+
+{% endblock content %}
+

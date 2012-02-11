@@ -1,0 +1,38 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/inicia_inventario/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+<h3>Lista de Inventários</h3>
+
+<ul>
+{%for item in lista_itens %}
+	<li>
+		<a href="/inventario/remove_inventario/{{item.id}}">
+		 <img src="{{STATIC_URL}}image/delete.png"/>
+		</a>
+		<a href="/inventario/edita_inventario/{{item.id}}">
+		 <img src="{{STATIC_URL}}image/editar.png"/>
+		</a>
+		 Empresa: {{item.empresa}} | Data de criação: {{item.data}} | Ano: {{item.ano}} 
+		
+	
+	</li>
+
+
+{%empty%}
+	<li>Nenhum Inventario Criado</li>
+{%endfor%}
+</u>
+{%endblock content%}

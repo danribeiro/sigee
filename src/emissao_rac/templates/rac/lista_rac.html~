@@ -1,0 +1,37 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/emissao_rac/adiciona_rac/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Emissões por R&AC</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    
+			<a href="/emissao_rac/calcula_rac/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/calcular.png"/>
+			</a>
+			<a href="/emissao_rac/remove_rac/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/emissao_rac/edita_rac/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>		
+			Inventário.: {{item.inventario}} 
+				
+	</li>
+
+{%empty%}
+	<li>Nenhum Relato de Emissão por R&AC</li>
+{%endfor%}
+</ul>
+{%endblock content%}

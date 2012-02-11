@@ -1,0 +1,16 @@
+#urls referentes a views empresa
+
+from django.conf.urls.defaults	import  patterns, url
+from inventario import views
+
+urlpatterns=patterns('inventario.views',
+	url(r'^lista_empresa/$', 'lista_empresa',name='lista_empresa'),
+	url(r'^item/(?P<nr_item>\d+)/$','item', name='item'),
+	url(r'^adiciona_empresa/$','adiciona_empresa',name ='adiciona_empresa'),	
+	url(r'^inicia_inventario/$','inicia_inventario', name='inicia_inventario'),
+	url(r'^adiciona_ced/$', 'adiciona_ced', name='adiciona_ced'),
+	url(r'^adiciona_FonteCED/$', 'adiciona_FonteCED', name='adiciona_FonteCED'),
+	url(r'exclui_empresa/(?P<nr_item>\d+)/$)','exclui_empresa',name='exclui_empresa')
+
+
+)

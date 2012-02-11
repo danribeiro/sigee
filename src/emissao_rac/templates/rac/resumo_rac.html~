@@ -1,0 +1,44 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/emissao_rac/adiciona_fonterac/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+<ul>
+	<ul>
+		<h3>	Resumo RAC - Emissão por refrigeradores & ar-condicionado  </h3>
+		<h3> 	Total de emissões por refrigeradores & ar-condicionado	</h3>		 		 
+		<table border=1 >
+		<tr>
+		<td>  </td> 										  <td>       CO2 (kg)             </td>
+		</tr>
+		<tr>
+		<td> Emissões totais de CO2.: </td> <td>{{totalco2}} </td> 
+		</tr>
+		
+		</table>
+		
+		_________________________________________________________________________</br></br>		
+		  
+		 <table border=1 >
+		
+		<tr>
+		<td bgcolor='blue'> Emissões  Totais de CO2 - Equivalente (toneladas métricas).: </td> <td bgcolor='blue'> <strong> {{emissoes_equivalentes}} </strong> </td>
+		</tr>
+		</table>
+		</br></br>
+		<a  href =""> <input type="submit" value="Salvar Resultado" class="button"></a></p>
+		
+{%endblock content%}
+

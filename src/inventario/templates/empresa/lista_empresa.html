@@ -1,0 +1,40 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/adiciona_empresa/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+
+
+
+
+{%block content%}
+<h3>Lista de Empresas</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>    		
+				<a href="/inventario/remove_empresa/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/inventario/edita_empresa/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>
+			  	Empresa: {{item.nome}} | Cidade: {{item.cidade}} | Estado: {{item.estado}} | CEP: {{item.cep}}
+					
+			
+	</li>
+
+{%empty%}
+	<li>Nenhuma Empresa cadastrada</li>
+{%endfor%}
+</ul>
+{%endblock content%}

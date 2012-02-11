@@ -1,0 +1,37 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_vapor/adiciona_fonteecv/">Voltar</a></li>
+			
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Fontes de emissão por compra de energia elétrica</h3>
+<ul>
+
+{%for item in lista_itens %}
+	<li>    
+			<a href="/compra_vapor/remove_fonteecv/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/compra_vapor/edita_fonteecv/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>		
+			ECV da Empresa.: {{item.ecv}} | Fonte de Emissão.: {{item.fonte_emissao}} | Eff do Fervedor(%).:{{item.fervedor}}  | Vapor Comprado (GJ).: {{item.vapor}}
+					
+			
+	</li>
+
+{%empty%}
+	<li>Nenhuma fonte de emissão por compra de vapor</li>
+{%endfor%}
+</ul>
+{%endblock content%}

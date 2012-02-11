@@ -1,0 +1,298 @@
+# Create your views here.
+#-*-coding:utf-8 -*-
+
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from inventario.models import *
+from combustao_movel.models import *
+from compra_vapor.models import *
+from compra_energia.models import *
+from emissao_rac.models import *
+
+from inventario.views import *
+from combustao_movel.views import *
+from compra_vapor.views import *
+from compra_energia.views import *
+from emissao_rac.views import *
+
+from report import write_to_pdf
+
+
+	
+def calcula_resumo(request):
+	inventario=Inventario.objects.get()
+	empresa=Empresa.objects.get(inventario=inventario)#get da empresa
+	nome_empresa=empresa.nome
+	rua_empresa=empresa.rua
+	numero_empresa=empresa.numero
+	bairro_empresa=empresa.bairro
+	cep_empresa=empresa.cep
+	cidade_empresa=empresa.cidade
+	estado_empresa=empresa.estado
+	inventario=inventario.ano #ano do inventário	
+	
+	#ced=CED.objects.get(inventario=inventario)
+	#rac=RAC.objects.get(inventario=inventario)
+	#ecv=ECV.objects.get(inventario=inventario)
+	#ece=ECE.objects.get(inventario=inventario)
+	#ecm=ECM.objects.get(inventario=inventario)
+	
+	totalecv=TotalECV.objects.all() #busca totais de ECM salvos 
+	countecv=totalecv.count()	#atualiza o numero do id 
+	
+	totalece=TotalECE.objects.all() #busca totais de ECE salvos 
+	countece=totalece.count()	#atualiza o numero do id
+	
+	totalecm=TotalECM.objects.all() #busca totais de ECV salvos 
+	countecm=totalecm.count()	#atualiza o numero do id
+	
+	totalced=TotalCED.objects.all() #busca totais de CED salvos 
+	countced=totalced.count()	#atualiza o numero do id
+	
+	totalrac=TotalRAC.objects.all() #busca totais de RAC salvos 
+	countrac=totalrac.count()	#atualiza o numero do id 	
+	
+	
+	#############################################################################
+	
+	 
+	if totalced.exists() or totalrac.exists() or totalecm.exists() or totalece.exists() or totalecv.exists():
+		#totais de CED
+		totalced=TotalCED.objects.get(pk=countced) #pega o objeto mais atual
+		ced_fossil_co2=totalced.fossilced_co2
+		ced_fossil_ch4=totalced.fossilced_ch4
+		ced_fossil_n2o=totalced.fossilced_n2o				
+		ced_bioco2=totalced.bioced_co2
+		ced_bioch4=totalced.bioced_ch4
+		ced_bion2o=totalced.bioced_n2o
+		ced_emissoes_equivalentes=totalced.emissoes_equivalentes_ced
+		ced_emissoes_biomassa=totalced.emissoes_biomassa_ced
+		
+			
+	############################################################################	
+	
+		totalrac=TotalRAC.objects.get(pk=countrac)
+		rac_total_co2=totalrac.totalrac_co2
+		rac_emissoes_equivalentes=totalrac.emissoes_equivalentes_rac
+		
+	############################################################################	
+		
+		totalecm=TotalECM.objects.get(pk=countecm)
+		ecm_fossil_co2=totalecm.ecm_fossil_co2
+		ecm_bio_co2=totalecm.ecm_bio_co2		
+		ecm_emissoes_equivalentes=totalecm.ecm_emissoes_equivalentes
+		ecm_emissoes_biomassa=totalecm.ecm_emissoes_biomassa
+		
+	############################################################################
+	
+		totalece=TotalECE.objects.get(pk=countece)
+		ece_fossil_co2=totalece.ece_fossil_co2
+		ece_emissoes_equivalentes=totalece.ece_emissoes_equivalentes
+		
+	############################################################################
+	
+		totalecv=TotalECV.objects.get(pk=countecv)
+		ecv_fossil_co2=totalecv.ecv_fossil_co2
+		ecv_fossil_ch4=totalecv.ecv_fossil_ch4
+		ecv_fossil_n2o=totalecv.ecv_fossil_n2o
+		ecv_bio_co2=totalecv.ecv_bio_co2
+		ecv_bio_ch4=totalecv.ecv_bio_ch4
+		ecv_bio_n2o=totalecv.ecv_bio_n2o
+		ecv_emissoes_equivalentes=totalecv.ecv_emissoes_equivalentes
+		ecv_emissoes_biomassa=totalecv.ecv_emissoes_biomassa
+	
+	############################################################################
+	
+	
+		total_emissoes_equivalentes_co2=ced_fossil_co2+ecm_fossil_co2+ecv_fossil_co2+rac_total_co2+ece_fossil_co2
+	
+		total_emissoes_biomassa_co2=ecv_bio_co2+ecm_bio_co2+ecv_bio_co2
+	
+		total_equivalente_ch4=ced_fossil_ch4+ecv_fossil_ch4
+		total_equivalente_n2o=ced_fossil_n2o+ecv_fossil_n2o
+	
+		total_geral_equivalentes=ced_emissoes_equivalentes+ecv_emissoes_equivalentes+ecm_emissoes_equivalentes+ece_emissoes_equivalentes+rac_emissoes_equivalentes
+	
+		total_geral_biomassa=ecv_emissoes_biomassa+ced_emissoes_biomassa
+		
+			
+		return render_to_response('resumo/pagina_resumo.html', {
+		#dados de CED 
+		'ced_fossil_co2':ced_fossil_co2,'ced_fossil_ch4':ced_fossil_ch4,'ced_fossil_n2o':ced_fossil_n2o,'ced_emissoes_equivalentes':ced_emissoes_equivalentes,
+		'ced_emissoes_biomassa':ced_emissoes_biomassa,'ced_bioco2':ced_bioco2,'ced_bioch4':ced_bioch4,'ced_bion2o':ced_bion2o,
+		
+		#dados da empresa
+		'inventario':inventario,'nome_empresa':nome_empresa,'rua_empresa':rua_empresa,'numero_empresa':numero_empresa,'bairro_empresa':bairro_empresa,
+		'cep_empresa':cep_empresa, 'cidade_empresa':cidade_empresa, 'estado_empresa':estado_empresa,
+		
+		#dados de RAC
+		'rac_total_co2':rac_total_co2,'rac_emissoes_equivalentes':rac_emissoes_equivalentes,
+		
+		#dados de ECM
+		'ecm_fossil_co2':ecm_fossil_co2,'ecm_emissoes_equivalentes':ecm_emissoes_equivalentes,'ecm_emissoes_biomassa':ecm_emissoes_biomassa,'ecm_bio_co2':ecm_bio_co2,
+		
+		#dados de ECE
+		'ece_fossil_co2':ece_fossil_co2,'ece_emissoes_equivalentes':ece_emissoes_equivalentes,
+		
+		#dados de ECV
+		'ecv_fossil_co2':ecv_fossil_co2,'ecv_fossil_ch4':ecv_fossil_ch4, 'ecv_fossil_n2o':ecv_fossil_n2o,'ecv_emissoes_equivalentes':ecv_emissoes_equivalentes,'ecv_emissoes_biomassa':ecv_emissoes_biomassa,'ecv_bio_co2':ecv_bio_co2,
+		#############################################################################################################################
+		#total de CH4 e N2O
+		'total_equivalente_ch4':total_equivalente_ch4,'total_equivalente_n2o':total_equivalente_n2o,		
+		
+		#total de emissoes relativos a CO2
+		'total_emissoes_equivalentes_co2':total_emissoes_equivalentes_co2,
+		
+		#total de emissoes biomassa relativos a CO2
+		'total_emissoes_biomassa_co2':total_emissoes_biomassa_co2,
+		
+		#total geral de emissoes CO2 equivalente
+		'total_geral_equivalentes':total_geral_equivalentes,
+		
+		#total geral de emissoes CO2 biomassa
+		'total_geral_biomassa':total_geral_biomassa,
+		
+		},context_instance=RequestContext(request))
+	else:
+	
+		return render_to_response('resumo/pagina_resumo.html',{},context_instance=RequestContext(request))
+	
+		
+		
+def relatorio_resumo(request):
+	inventario=Inventario.objects.get()
+	empresa=Empresa.objects.get(inventario=inventario)#get da empresa
+	nome_empresa=empresa.nome
+	rua_empresa=empresa.rua
+	numero_empresa=empresa.numero
+	bairro_empresa=empresa.bairro
+	cep_empresa=empresa.cep
+	cidade_empresa=empresa.cidade
+	estado_empresa=empresa.estado
+	inventario=inventario.ano #ano do inventário	
+	
+	#ced=CED.objects.get(inventario=inventario)
+	#rac=RAC.objects.get(inventario=inventario)
+	#ecv=ECV.objects.get(inventario=inventario)
+	#ece=ECE.objects.get(inventario=inventario)
+	#ecm=ECM.objects.get(inventario=inventario)
+	
+	totalecv=TotalECV.objects.all() #busca totais de ECM salvos 
+	countecv=totalecv.count()	#atualiza o numero do id 
+	
+	totalece=TotalECE.objects.all() #busca totais de ECE salvos 
+	countece=totalece.count()	#atualiza o numero do id
+	
+	totalecm=TotalECM.objects.all() #busca totais de ECV salvos 
+	countecm=totalecm.count()	#atualiza o numero do id
+	
+	totalced=TotalCED.objects.all() #busca totais de CED salvos 
+	countced=totalced.count()	#atualiza o numero do id
+	
+	totalrac=TotalRAC.objects.all() #busca totais de RAC salvos 
+	countrac=totalrac.count()	#atualiza o numero do id 	
+	
+	
+	#############################################################################
+	
+	 
+	if totalced.exists() or totalrac.exists() or totalecm.exists() or totalece.exists() or totalecv.exists():
+		#totais de CED
+		totalced=TotalCED.objects.get(pk=countced) #pega o objeto mais atual
+		ced_fossil_co2=totalced.fossilced_co2
+		ced_fossil_ch4=totalced.fossilced_ch4
+		ced_fossil_n2o=totalced.fossilced_n2o				
+		ced_bioco2=totalced.bioced_co2
+		ced_bioch4=totalced.bioced_ch4
+		ced_bion2o=totalced.bioced_n2o
+		ced_emissoes_equivalentes=totalced.emissoes_equivalentes_ced
+		ced_emissoes_biomassa=totalced.emissoes_biomassa_ced
+		
+			
+	############################################################################	
+	
+		totalrac=TotalRAC.objects.get(pk=countrac)
+		rac_total_co2=totalrac.totalrac_co2
+		rac_emissoes_equivalentes=totalrac.emissoes_equivalentes_rac
+		
+	############################################################################	
+		
+		totalecm=TotalECM.objects.get(pk=countecm)
+		ecm_fossil_co2=totalecm.ecm_fossil_co2
+		ecm_bio_co2=totalecm.ecm_bio_co2		
+		ecm_emissoes_equivalentes=totalecm.ecm_emissoes_equivalentes
+		ecm_emissoes_biomassa=totalecm.ecm_emissoes_biomassa
+		
+	############################################################################
+	
+		totalece=TotalECE.objects.get(pk=countece)
+		ece_fossil_co2=totalece.ece_fossil_co2
+		ece_emissoes_equivalentes=totalece.ece_emissoes_equivalentes
+		
+	############################################################################
+	
+		totalecv=TotalECV.objects.get(pk=countecv)
+		ecv_fossil_co2=totalecv.ecv_fossil_co2
+		ecv_fossil_ch4=totalecv.ecv_fossil_ch4
+		ecv_fossil_n2o=totalecv.ecv_fossil_n2o
+		ecv_bio_co2=totalecv.ecv_bio_co2
+		ecv_bio_ch4=totalecv.ecv_bio_ch4
+		ecv_bio_n2o=totalecv.ecv_bio_n2o
+		ecv_emissoes_equivalentes=totalecv.ecv_emissoes_equivalentes
+		ecv_emissoes_biomassa=totalecv.ecv_emissoes_biomassa
+	
+	############################################################################
+	
+	
+		total_emissoes_equivalentes_co2=ced_fossil_co2+ecm_fossil_co2+ecv_fossil_co2+rac_total_co2+ece_fossil_co2
+	
+		total_emissoes_biomassa_co2=ecv_bio_co2+ecm_bio_co2+ecv_bio_co2
+	
+		total_equivalente_ch4=ced_fossil_ch4+ecv_fossil_ch4
+		total_equivalente_n2o=ced_fossil_n2o+ecv_fossil_n2o
+	
+		total_geral_equivalentes=ced_emissoes_equivalentes+ecv_emissoes_equivalentes+ecm_emissoes_equivalentes+ece_emissoes_equivalentes+rac_emissoes_equivalentes
+	
+		total_geral_biomassa=ecv_emissoes_biomassa+ced_emissoes_biomassa
+		
+		return write_to_pdf('resumo/relatorio_resumo.html', 			
+		{
+		#dados de CED 
+		'ced_fossil_co2':ced_fossil_co2,'ced_fossil_ch4':ced_fossil_ch4,'ced_fossil_n2o':ced_fossil_n2o,'ced_emissoes_equivalentes':ced_emissoes_equivalentes,
+		'ced_emissoes_biomassa':ced_emissoes_biomassa,'ced_bioco2':ced_bioco2,'ced_bioch4':ced_bioch4,'ced_bion2o':ced_bion2o,
+		
+		#dados da empresa
+		'inventario':inventario,'nome_empresa':nome_empresa,'rua_empresa':rua_empresa,'numero_empresa':numero_empresa,'bairro_empresa':bairro_empresa,
+		'cep_empresa':cep_empresa, 'cidade_empresa':cidade_empresa, 'estado_empresa':estado_empresa,
+		
+		#dados de RAC
+		'rac_total_co2':rac_total_co2,'rac_emissoes_equivalentes':rac_emissoes_equivalentes,
+		
+		#dados de ECM
+		'ecm_fossil_co2':ecm_fossil_co2,'ecm_emissoes_equivalentes':ecm_emissoes_equivalentes,'ecm_emissoes_biomassa':ecm_emissoes_biomassa,'ecm_bio_co2':ecm_bio_co2,
+		
+		#dados de ECE
+		'ece_fossil_co2':ece_fossil_co2,'ece_emissoes_equivalentes':ece_emissoes_equivalentes,
+		
+		#dados de ECV
+		'ecv_fossil_co2':ecv_fossil_co2,'ecv_fossil_ch4':ecv_fossil_ch4, 'ecv_fossil_n2o':ecv_fossil_n2o,'ecv_emissoes_equivalentes':ecv_emissoes_equivalentes,'ecv_emissoes_biomassa':ecv_emissoes_biomassa,'ecv_bio_co2':ecv_bio_co2,
+		#############################################################################################################################
+		#total de CH4 e N2O
+		'total_equivalente_ch4':total_equivalente_ch4,'total_equivalente_n2o':total_equivalente_n2o,		
+		
+		#total de emissoes relativos a CO2
+		'total_emissoes_equivalentes_co2':total_emissoes_equivalentes_co2,
+		
+		#total de emissoes biomassa relativos a CO2
+		'total_emissoes_biomassa_co2':total_emissoes_biomassa_co2,
+		
+		#total geral de emissoes CO2 equivalente
+		'total_geral_equivalentes':total_geral_equivalentes,
+		
+		#total geral de emissoes CO2 biomassa
+		'total_geral_biomassa':total_geral_biomassa,
+		
+		},'Relatório.pdf')
+	
+	
+		

@@ -1,0 +1,5 @@
+from django.contrib import admin
+from inventario.models import FonteEmissao,EfSetor, SetorAtividade
+admin.site.register(FonteEmissao)
+admin.site.register(EfSetor)
+admin.site.register(SetorAtividade)

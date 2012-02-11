@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{%block content%}
+
+<p><a href ="{% url inventario:adiciona_empresa %}" >Adicionar nova empresa</a></p>
+<ul>
+{%for item in lista_itens %}
+	<li>
+		<a href="/item/item.id}}">
+			Nome: {{item.nome}}  </a>
+	</li>
+{%empty%}
+	<li>Sem itens na lista</li>
+{%endfor%}
+</u>
+{%endblock content%}

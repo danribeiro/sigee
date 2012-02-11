@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			
+			<li><a href="/emissao_rac/lista_gas/">Listar Gases</a></li>
+			</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+	
+	
+	<h3>Gás</h3>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="Atualizar cadastro de Gás" class="button">
+	</form></br>
+	
+
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{%block menu%}
+{{block.super}}
+
+{%endblock menu%}
+
+{% block content %}
+<h2>Fonte Detalhada</h2>
+<ul>
+	<p>	Nome: {{item.nome}} | Unidade: {{item.unidade}} | tipo: {{item.tipo}} <p>
+	<p> Fator CO2: {{item.ef_co2}} | Fator NH4: {{item.ef_nh4}}</p>
+</u>
+{% endblock content %}

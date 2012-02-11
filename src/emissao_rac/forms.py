@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+from models import RAC, FonteRAC, Gas,Equipamento
+from django  import  forms
+from django.forms.models import ModelForm
+
+class FormRAC(forms.ModelForm):
+	class Meta:
+		model=RAC		
+
+class FormGas(forms.ModelForm):
+	class Meta:
+		model=Gas
+		fields=('gas','gwp')
+
+class FormEquipamento(forms.ModelForm):
+	class Meta:
+		model=Equipamento
+		fields=('tipo','coe_novas','coe_operacional','coe_dispensado')
+		
+
+class FormFonteRAC(forms.ModelForm):	
+	registro=forms.CharField(max_length=50,required=False)
+	class Meta:
+		model=FonteRAC
+		fields=('rac','registro','gas_rac','equipamento_rac','novas','operacional','dispensado')
+
+
+		
+
+

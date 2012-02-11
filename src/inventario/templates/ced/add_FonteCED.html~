@@ -1,0 +1,25 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/adiciona_ced/">voltar</a></li>
+			<li><a href="/inventario/lista_fonteCED/">Listar CEDs</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+	<h3>Emissões por Combustão estacionária</h3>
+	<form action ="" method ="post">
+	{%csrf_token%}	
+	{{form.as_p}}
+	<button type="submit"> Adicionar Emissão</button>
+	</form>
+	
+		
+{%endblock content%}

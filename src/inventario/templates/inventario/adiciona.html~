@@ -1,0 +1,13 @@
+{% extends 'index.html'%}
+
+{%block content%}
+	<h2>Cadastrar empresa</h2>
+	<form action ="" method ="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<button type="submit"> Adicionar</button>
+	</form>
+	<a href="{%url inventario:lista_empresa%}"><button type="submit"> listar empresa</button></br>
+	<a href="{%url inventario:inicia_inventario%}"><button type="submit"> iniciar inventario</button></a>
+		
+{%endblock content%}

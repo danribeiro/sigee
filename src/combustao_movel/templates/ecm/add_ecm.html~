@@ -1,0 +1,32 @@
+
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/inicia_inventario/">Voltar</a></li>
+			<li><a href="/combustao_movel/lista_ecm/">Listar</a></li>			
+			<li><a href="/combustao_movel/adiciona_emissaoecm/">Fatores de Emissão ECMs</a></li>
+			<li><a href="/combustao_movel/adiciona_fonteecm/">Relatar Emissão por Combustão Móvel</a></li>
+							
+		
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+	
+	
+	<h3> Emissões por Combustão Móvel</h3>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="Cadastrar ECM" class="button">
+	</form></br>
+	
+
+{% endblock content %}

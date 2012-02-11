@@ -1,0 +1,25 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/lista_empresa/">Listar Empresas</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+
+	<h3>Empresa</h3>
+	<form action ="" method ="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<button type="submit"> Cadastrar Empresa </button>
+	</form>
+			
+{%endblock content%}

@@ -1,0 +1,52 @@
+<!doctype	
+  html>
+<html>
+	<head>
+	<link href="estilo.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+	
+		<div id="page">
+			<div id="header">
+				
+					<img src="{{STATIC_URL}}image/sigee.png" 	/>
+				
+			</div>
+			<center><h2>Sistema de Inventário de Gases do Efeito Estufa</h2></center>
+			
+			<div id="menu">
+			{%block	menu%}
+			  
+			{%endblock menu%}
+			</div>			
+			<div id="content">
+				{%block	content%}
+			  
+				{%endblock content%}
+			</div>
+			<hr>
+			<div id="footer" style="text-align: right">
+			<a href="http://www.djangoproject.com/"><img src="{{STATIC_URL}}/image/djpowered.gif" border="0" alt="Powered by Django." title="Powered by Django." /></a>
+						
+			</div>
+		</div>
+	 </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

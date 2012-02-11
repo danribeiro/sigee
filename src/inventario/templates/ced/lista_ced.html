@@ -1,0 +1,43 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/adiciona_fonteCED/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+<h3>Lista de Combustão Estacionária por Setor</h3>
+<ul>
+{%for item in lista_itens %}
+	<li>
+		<a href="/inventario/calcula_ced/{{item.id}}">
+		<img src="{{STATIC_URL}}image/calcular.png"/>
+		</a>
+		<a href="/inventario/edita_ced/{{item.id}}">
+		<img src="{{STATIC_URL}}image/editar.png"/>
+		</a>
+		 Inventario: {{item.inventario}} | Setor de Atividade: {{item.setor_atividade}} 
+		
+	
+	</li>
+{%block resumo%}
+
+{%endblock resumo%}
+
+
+{%empty%}
+	<li>Nenhum item cadastrado</li>
+{%endfor%}
+</u>
+{%endblock content%}
+
+

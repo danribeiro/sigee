@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	
+	<h1>Nova Empresa</h1>
+	<form action="." method="POST">
+	{% csrf_token %}
+	.as_p }}
+	<input type="submit" value="adicionar!" class="button">
+	</form>
+ 	
+ 	<p>Setor de Atividade</p>
+{% endblock content %}

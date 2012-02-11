@@ -1,0 +1,33 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/adiciona_empresa/">Adicionar Empresa</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<ul>
+{%for item in lista_itens %}
+
+	<li>    
+		    
+			<a href="/inventario/item/{{item.id}}">
+			  {{item.nome}}  
+			</a>
+			<a href="/inventario/exclui_empresa/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/excluir.png"/>
+			</a>
+	</li>
+
+{%empty%}
+	<li>Sem itens na lista de Empresas</li>
+{%endfor%}
+</ul>
+{%endblock content%}

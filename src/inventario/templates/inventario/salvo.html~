@@ -1,0 +1,9 @@
+{%extends 'base.html'%}
+
+{% block content %}
+<p>empresa Salva com sucesso</p>
+
+<a href='/adiciona/'> nova empresa</a>
+
+{% endblock content %}
+

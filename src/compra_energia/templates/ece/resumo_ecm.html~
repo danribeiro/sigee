@@ -1,0 +1,32 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_energia/adiciona_fonteece/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+
+		 <h3>	Resumo ECE - Emissão por Compra de Energia Elétrica	  </h3>
+		 <h3> Total de Emissões de CO2 em ton CO2/KWH</h3>		 
+		
+		 Emissões totais de CO2	
+		 	 
+		CO2: {{totalco2}} </br>			 
+		 _________________________________________________________________________</br></br>		 
+		 
+		 Emissões  Totais de CO2 - Equivalente (toneladas métricas) .:  {{emissoes_equivalentes}}  </br></br>
+		 
+		
+
+{%endblock content%}
+

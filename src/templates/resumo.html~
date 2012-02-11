@@ -1,0 +1,40 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/combustao_movel/adiciona_fonteecm/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+
+		<table border=2 >
+		<tr>
+		<td> primeira coluna </td> <td> segunda coluna</td>
+		</tr>
+		</table>
+
+		 <h3>	Resumo ECM - Emissão por Combustão Móvel	  </h3>
+		 <h3> Total de Emissões por Combustível Fóssil </h3>		 
+		 Emissões totais de combustíveis Fósseis .:		 
+		CO2: {{fossilco2}} </br>			 
+		 <p>Emissões totais de combustíveis Não-Fósseis .:		
+		CO2: {{bioco2}} </br></br>
+		 
+		 _________________________________________________________________________</br></br>		 
+		 
+		 Emissões  Totais de CO2 - Equivalente (toneladas métricas) .:  {{emissoes_equivalentes}}  </br></br>
+		 
+		 Emissões  Totais de CO2 de Biomassa - Equivalente (toneladas métricas) .:  {{emissoes_biomassa}}	 
+
+
+{%endblock content%}
+

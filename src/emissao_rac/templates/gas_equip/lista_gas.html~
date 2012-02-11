@@ -1,0 +1,33 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/emissao_rac/adiciona_gas/">Voltar</a></li>
+			</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista Gases</h3>
+<ul>
+
+{%for item in lista_itens %}
+	<li>    
+			<a href="/emissao_rac/remove_gas/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>				
+			Gas.:{{item.gas}} | GWP.:{{item.gwp}} 
+			
+			
+	</li>
+
+{%empty%}
+	<li>Nenhuma Gás</li>
+{%endfor%}
+</ul>
+{%endblock content%}

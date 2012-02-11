@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/fonte_emissao/adiciona_fonte/">voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{% block content %}
+
+<h3>Lista de Fontes de Emissão</h3>
+<a href="/fonte_emissao/gerapdf_fonte/">  <input type="submit" value="Relatório de Fontes" class="button"></a>
+<ul>
+{%for item in lista_itens %}
+	
+	<li>
+		<a href="/fonte_emissao/remove_fonte/{{item.id}}">
+		<img src="{{STATIC_URL}}image/delete.png">
+		</a>
+		<a href="/fonte_emissao/edita_fonte/{{item.id}}">
+		<img src="{{STATIC_URL}}image/editar.png">
+		</a>
+	 	Combustível: {{item.nome}} | Fator de Emissão de CO2: {{item.ef_co2}} | Unidade: {{item.unidade}} |  Tipo: {{item.get_tipo_display}}			
+		
+		
+				
+		
+	</li>
+	
+{%empty%}
+	<li>Nenhuma Fonte de Emissão</li>
+{%endfor%}
+</ul>
+{% endblock content %}

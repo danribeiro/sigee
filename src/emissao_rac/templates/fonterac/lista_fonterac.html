@@ -1,0 +1,37 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/emissao_rac/adiciona_fonterac/">Voltar</a></li>
+			
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Emissões por Refrigeradores & Ar-condicionado</h3>
+<ul>
+
+{%for item in lista_itens %}
+	<li>    	
+			<a href="/emissao_rac/remove_fonterac/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>		
+				
+			<a href="/emissao_rac/edita_fonterac/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>
+			Gás.:{{item.gas_rac}} | Equipamento.: {{item.equipamento_rac}} | Cargas de Unidades Novas.:{{item.novas}} | Unidades em Operação.:{{item.operacional}} | Unidades de Dispensados {{item.dispensado}}
+			
+	</li>
+
+{%empty%}
+	<li>Nenhuma Fonte de R&AC</li>
+{%endfor%}
+</ul>
+{%endblock content%}

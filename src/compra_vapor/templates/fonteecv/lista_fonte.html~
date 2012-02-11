@@ -1,0 +1,38 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_vapor/adiciona_fonte/">Voltar</a></li>
+			
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Combustíveis</h3>
+<ul>
+
+{%for item in lista_itens %}
+	<li>    
+		<a href="/compra_vapor/remove_fonte/{{item.id}}">
+	   	<img src="{{STATIC_URL}}image/delete.png"/>
+		</a>
+		<a href="/compra_vapor/edita_fonte/{{item.id}}">
+	   	<img src="{{STATIC_URL}}image/editar.png"/>
+		</a>		
+					
+			 Combustível.: {{item.combustivel}} | Densidade (Kg/un).:{{item.densidade}} | Poder Calorífico Inf (GJ/t).:{{item.caloria}} | Fator CO2.:{{item.fatorco2}} | Fator CH4.:{{item.fatorch4}} | Fator N20.:{{item.fatorn2o}}
+	
+	    
+	</li>
+
+{%empty%}
+	<li>Nenhuma Fonte de emissão por compra de vapor</li>
+{%endfor%}
+</ul>
+{%endblock content%}

@@ -1,0 +1,40 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/compra_energia/adiciona_fonteece/">Voltar</a></li>
+			
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista de Emissões por Compra de Energia Elétrica</h3>
+
+<ul>
+
+{%for item in lista_itens %}
+	<li>    
+			<a href="/compra_energia/remove_fonteece/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/compra_energia/edita_fonteece/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>					
+			Empresa.: {{item.ece}} | Total do mês  {{item.mes}} = {{item.quantidade}} kWh
+			
+			
+			
+			
+	</li>
+
+{%empty%}
+	<li>Nenhuma Fonte de emissão por compra de energia</li>
+{%endfor%}
+</ul>
+{%endblock content%}

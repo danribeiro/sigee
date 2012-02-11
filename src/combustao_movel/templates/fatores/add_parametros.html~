@@ -1,0 +1,27 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<hr>
+<body>
+	<div id="menu">
+		<ul>
+		<li><a href="/combustao_movel/adiciona_fator/">Voltar</a></li>
+			<li><a href="/combustao_movel/lista_param/">Listar Parâmetros</a></li>
+			
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+
+	<h3>Parâmetro</h3>
+	<form action ="" method ="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<button type="submit">Cadastrar Parâmetro</button>
+	</form>
+			
+{%endblock content%}

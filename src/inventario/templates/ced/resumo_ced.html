@@ -1,0 +1,60 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/adiciona_fonteCED/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+
+<ul>
+	<ul>		
+		<h3>	Resumo CED - Emissão por combustão estacionária direta  </h3>
+		<h3> 	Total de Emissões por combustão estacionária	</h3>		 		 
+		<table border=1 >
+		<tr>
+		<td>  </td> 										  <td>       CO2             </td><td> CH4</td> <td> N2O </td>
+		</tr>
+		<tr>
+		<td> Emissões totais de combustíveis Fósseis </td> <td> {{fossilco2}} </td> <td>{{fossilch4}} </td> <td> {{fossiln2o}} </td>
+		</tr>
+		<tr>
+		<td> Emissões totais de combustíveis Não-Fósseis</td> <td> {{bioco2}}  </td> <td>   {{bioch4}} </td> <td> {{bion2o}}  </td>
+		</tr>
+		</table>
+		
+		_________________________________________________________________________</br></br>		
+		  
+		 <table border=1 >
+		
+		<tr>
+		<td bgcolor='blue'> Emissões  Totais de CO2 - Equivalente (toneladas métricas) </td> <td  bgcolor='blue'><strong> {{emissoes_equivalentes}} </strong> </td>
+		</tr>
+		<tr>
+		<td bgcolor='green'>Emissões  Totais de CO2 de Biomassa - Equivalente (toneladas métricas) </td> <td bgcolor='green'><strong> {{emissoes_biomassa}}	</strong> </td>
+		</tr>
+		</table>
+		</br></br>
+		
+		
+
+		 
+				 
+					 
+		
+		  
+		 
+		  
+
+
+{%endblock content%}
+

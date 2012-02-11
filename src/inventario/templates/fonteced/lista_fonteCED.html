@@ -1,0 +1,41 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/adiciona_fonteCED/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+<h3>Lista de Emissões Estacionárias Diretas</h3>
+<ul>
+	     
+		
+{%for item in lista_itens %}
+
+		<a href="/inventario/remove_fonteCED/{{item.id}}">
+		 <img src="{{STATIC_URL}}image/delete.png"/>
+		</a>  
+		
+		<a href="/inventario/edita_fonteCED/{{item.id}}">
+		 <img src="{{STATIC_URL}}image/editar.png"/>
+		</a>
+		Empresa: {{item.ced}} |Combustível: {{item.fonte_emissao}} | Quantidade:{{item.quantidade}} |  Registro da fonte{{item.registro_fonte}} | Descrição da fonte : {{item.descricao_fonte}}  </br>
+		
+	
+	
+
+
+{%empty%}
+	<li>Nenhuma Emissão relatada</li>
+{%endfor%}
+</u>
+{%endblock content%}

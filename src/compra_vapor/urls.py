@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+from django.conf.urls.defaults import patterns, include, url
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('compra_vapor.views',
+    #urls do modelo de emissão por compra de vapor
+    url(r'^lista_ecv/$','lista_ecv', name='lista_ecv'),
+    url(r'^adiciona_ecv/$','adiciona_ecv', name='adiciona_ecv'), 
+    url(r'^remove_ecv/(?P<nr_item>\d+)/$','remove_ecv',name='remove_ecv'),
+    url(r'^calcula_ecv/(?P<nr_item>\d+)/$','calcula_ecv',name='calcula_ecv'),
+    url(r'^edita_ecv/(?P<nr_item>\d+)/$','edita_ecv',name='edita_ecv'),   
+    
+    #urls do modelo de fonteECV
+    url(r'^adiciona_fonteecv/$','adiciona_fonteecv',name='adiciona_fonteecv'),
+    url(r'^lista_fonteecv/$','lista_fonteecv', name='lista_fonteecv'),
+    url(r'^remove_fonteecv/(?P<nr_item>\d+)/$','remove_fonteecv', name='remove_fonteecv'),
+    url(r'^edita_fonteecv/(?P<nr_item>\d+)/$','edita_fonteecv', name='edita_fonteecv'),
+    
+    #urls do modelo de FonteEmissao 
+    url(r'^adiciona_fonte/$','adiciona_fonte',name='adiciona_fonte'),
+    url(r'^lista_fonte/$','lista_fonte', name='lista_fonte'),
+    url(r'^remove_fonte/(?P<nr_item>\d+)/$','remove_fonte', name='remove_fonte'),
+    url(r'^edita_fonte/(?P<nr_item>\d+)/$','edita_fonte', name='edita_fonte'),
+    
+    
+   )

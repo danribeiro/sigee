@@ -1,0 +1,36 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/emissao_rac/adiciona_equip/">Voltar</a></li>
+			</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+<h3>Lista Equipamentos</h3>
+<ul>
+
+{%for item in lista_itens %}
+	<li>    
+			<a href="/emissao_rac/remove_equip/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/delete.png"/>
+			</a>
+			<a href="/emissao_rac/edita_equip/{{item.id}}">
+		    	<img src="{{STATIC_URL}}image/editar.png"/>
+			</a>		
+			Tipo do Equipamento.: {{item.tipo}} | Carga das Unidades Novas.: {{item.coe_novas}} | Unidades em Operação.:     {{item.coe_operacional}} | Unidades dispensadas.: {{item.coe_dispensado}}
+					
+			
+	</li>
+
+{%empty%}
+	<li>Nenhuma Equipamento</li>
+{%endfor%}
+</ul>
+{%endblock content%}

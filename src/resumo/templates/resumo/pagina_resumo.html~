@@ -1,0 +1,95 @@
+
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/combustao_movel/adiciona_fonteecm/">Voltar</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{%block content%}
+
+	<ul>
+		<ul>
+		
+		
+		<h3>Informações Sobre a Empresa</h3></br>
+		
+		Nome da Empresa.: {{nome_empresa}} </br>
+		Endereço.: {{rua_empresa}}    |   Número.: {{numero_empresa}}   </br>
+		Bairro.: {{bairro_empresa}}   |   CEP.:  {{cep_empresa}}     | Cidade.:  {{cidade_empresa}} | Estado.:  {{estado_empresa}} <br></br>
+		
+		Ano do Inventário.: <strong>{{inventario}}</strong>
+		</br></br>
+		
+		___________________________________________________________________________________________________</br>
+		
+		<h3>Resumo das Emissões da Empresa</h3>
+		
+		<table border=1>
+		<tr>
+		<td bgcolor='yellow'> <strong> Emissões de Escopo 1</strong> </td> <td bgcolor='yellow'> CO2(t) </td><td bgcolor='yellow'> CH4(t) </td><td bgcolor='yellow'> N2O(t) </td> <td bgcolor='yellow'> CO2-e(toneladas métricas)</td>
+		</tr>
+		
+		<tr>
+		<td> Combustão Estacionária </td> <td> {{ced_fossil_co2}}  </td><td> {{ced_fossil_ch4}}  </td><td> {{ced_fossil_n2o}}  </td> <td bgcolor='blue'> <strong><center>{{ced_emissoes_equivalentes}}</center></strong></td> 
+		</tr>
+		<tr>
+		<td> Fontes móveis</td> <td> {{ecm_fossil_co2}}  </td><td bgcolor='gray'>   </td><td bgcolor='gray'>   </td> <td bgcolor='blue'><strong><center>{{ecm_emissoes_equivalentes}}</center></strong> </td>
+		</tr>
+		<tr>
+		<td> Equipamentos de Refrigeração & Ar Condicionado </td> <td>  {{rac_total_co2}} </td><td bgcolor='gray'>  </td><td bgcolor='gray'>   </td> <td bgcolor='blue'><strong><center>{{rac_emissoes_equivalentes}}</center></strong> </td>
+		</tr>	
+		<tr>
+		<td bgcolor='yellow'>  <strong>Emissões de Escopo 2 </strong> </td> <td bgcolor='yellow'> </td><td bgcolor='yellow'> </td><td bgcolor='yellow'>  </td> <td bgcolor='yellow'> </td>
+		</tr>
+		
+		<tr>
+		<td> Eletricidade Comprada e Consumida </td> <td >{{ece_fossil_co2}}  </td><td bgcolor='gray'>  </td><td bgcolor='gray'>   </td> <td bgcolor='blue'> <strong><center>{{ece_emissoes_equivalentes}}</center></strong> </td>
+		</tr>
+		<tr>
+		<td> Vapor Comprado e Consumido </td> <td>{{ecv_fossil_co2}}  </td><td>{{ecv_fossil_ch4}}  </td><td>  {{ecv_fossil_n2o}} </td> <td bgcolor='blue'> <strong><center>{{ecv_emissoes_equivalentes}}</center></strong> </td>
+		</tr>
+		<tr>
+		<td bgcolor='yellow'>  <strong>Emissões Biomassa </strong> </td> <td bgcolor='yellow'> </td><td bgcolor='yellow'> </td><td bgcolor='yellow'>  </td> <td bgcolor='yellow'>  </td>
+		</tr>
+		<tr>
+		<td> Emissões de Biomassa de Fontes Estacionárias </td> <td>{{ced_bioco2}} </td><td bgcolor='gray'> </td><td bgcolor='gray'>  </td> <td bgcolor='green' > <strong><center>{{ced_emissoes_biomassa}}</center></strong></td>
+		</tr>
+		<tr>
+		<td> Emissões de Biomassa de Compra de Vapor </td> <td>{{ecv_bio_co2}}</td><td bgcolor='gray'> </td><td bgcolor='gray'>  </td> <td bgcolor='green'> <strong><center>{{ecv_emissoes_biomassa}}</center></strong> </td>
+		</tr> 
+		<tr>
+		<td>  Emissões de Biomassa de Fontes Móveis </td> <td> {{ecm_bio_co2}}</td><td bgcolor='gray'> </td><td bgcolor='gray'>  </td> <td  bgcolor='green'> <strong><center>{{ecm_emissoes_biomassa}}</center></strong></td>
+		</tr>
+		<tr>
+		<td bgcolor='yellow'>  <strong>Total de Emissões da Empresa </strong> </td> <td bgcolor='yellow'> </td><td bgcolor='yellow'> </td><td bgcolor='yellow'>  </td> <td bgcolor='yellow'>  </td>
+		</tr>
+		<tr>
+		<td>Total de Emissões GHG Escopo 1 + 2 da Empresa</td> <td>{{total_emissoes_equivalentes_co2}} </td><td> {{total_equivalente_ch4}}</td><td> {{total_equivalente_n2o}} </td> <td bgcolor='green' > <strong><center>{{total_geral_equivalentes}}</center></strong></td>
+		</tr>
+		<tr>
+		<td> Total de Emissões Biomassa da Empresa</td> <td>{{total_emissoes_biomassa_co2}} </td><td bgcolor='gray'> </td><td bgcolor='gray'>  </td> <td bgcolor='green' > <strong><center>{{total_geral_biomassa}}</center></strong></td>
+		</tr>
+		
+		</table>
+		<a href="/resumo/relatorio_resumo/"><input type="submit" value="Gerar PDF" class="button"></a></br>
+		
+		___________________________________________________________________________________________________</br>		
+		  
+		 
+		    
+		 </ul>
+		 </ul>
+		    
+
+
+{%endblock content%}
+

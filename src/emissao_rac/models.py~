@@ -1,0 +1,57 @@
+#-*- coding:utf-8 -*- 
+from django.db import models
+
+# Create your models here.
+
+from inventario.models import Inventario
+
+class RAC(models.Model):
+	inventario=models.OneToOneField(Inventario)
+	
+	def __unicode__(self):
+		return unicode(self.inventario)
+	
+class Gas(models.Model):
+	gas=models.CharField(max_length=20,verbose_name=u'Gás')
+	gwp=models.IntegerField(verbose_name=u'GWP')
+
+	def __unicode__(self):
+		return unicode(self.gas)
+
+class Equipamento(models.Model):
+	tipo=models.CharField(max_length=50)
+	coe_novas=models.FloatField(verbose_name=u'Cargas unidades novas')
+	coe_operacional=models.FloatField(verbose_name=u'Cargas unidades em operação')
+	coe_dispensado=models.FloatField(verbose_name=u'Cargas unidades dispensadas')
+	
+	def __unicode__(self):
+		return unicode(self.tipo)
+	
+
+class FonteRAC(models.Model):
+	rac=models.ForeignKey(RAC)
+	registro=models.CharField(max_length=50)
+	gas_rac=models.ForeignKey(Gas,verbose_name=u'Gases')
+	equipamento_rac=models.ForeignKey(Equipamento,verbose_name=u'Equipamentos')
+	novas=models.FloatField(verbose_name=u'Carga das unidades Novas')
+	operacional=models.FloatField(verbose_name=u'Unidades em Operação')
+	dispensado=models.FloatField(verbose_name=u'Unidades Dispensadas')
+	
+	def __unicode__(self):
+		return unicode(self.equipamento)
+	
+class TotalRAC(models.Model):
+	rac=models.ForeignKey(RAC)
+	totalrac_co2=models.FloatField()
+	emissoes_equivalentes_rac=models.FloatField()
+	
+	def __unicode__(self):
+		return unicode(self.rac)
+	
+
+
+	
+	
+	
+	
+

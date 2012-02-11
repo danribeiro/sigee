@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{%block menu%}
+{{block.super}}
+
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/fonte_emissao/adiciona_setor/">Adicionar Setor</a></li>
+			<li><a href="/fonte_emissao/adiciona_setor/">Listar Fontes de Emissão</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+
+{% block content %}
+		
+	<h2>Nova Fonte de Emissão</h2>
+	<form action="." method="POST">
+	{% csrf_token %}
+	{{form.as_p}}
+	<input type="submit" value="adicionar" class="button">
+	</form>
+ 	
+ 	
+{% endblock content %}

@@ -1,0 +1,50 @@
+from django.db import models
+#-*- coding:utf-8 -*-
+# Create your models here.
+
+from fonte_emissao.models import FonteEmissao
+from inventario.models import Inventario
+from combustao_movel.models import FatoresVariaveis, Parametros
+
+MONTH_CHOICES=(
+	(1,'Janeiro'),
+	(2,'Fevereiro'),
+	(3,'Março'),
+	(4,'Abril'),
+	(5,'Maio'),
+	(6,'Junho'),
+	(7,'Julho'),
+	(8,'Agosto'),
+	(9,'Setembro'),
+	(10,'Outubro'),
+	(11,'Novembro'),
+	(12,'Dezembro'),
+	)
+
+class ECE(models.Model):
+	inventario=models.OneToOneField(Inventario, verbose_name=u'Inventário')
+	
+	def __unicode__(self):
+		return unicode(self.inventario)  
+
+class FonteECE(models.Model):
+	
+	ece = models.ForeignKey(ECE, verbose_name=u'Empresa')
+	quantidade = models.FloatField(verbose_name=u'Total de consumo do mês (kWh)')
+	registro_fonte = models.CharField(max_length=50)
+	descricao_fonte = models.CharField(max_length = 75)	
+	mes=models.IntegerField(choices=MONTH_CHOICES)
+	
+	def __unicode__(self):
+		return unicode(self.mes)
+
+class TotalECE(models.Model):
+	ece=models.ForeignKey(ECE)
+	ece_fossil_co2=models.FloatField()
+	ece_emissoes_equivalentes=models.FloatField()
+	
+	def __unicode__(self):
+		return unicode(self.ece)	
+		
+		
+		

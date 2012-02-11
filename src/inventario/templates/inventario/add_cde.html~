@@ -1,0 +1,12 @@
+{% extends 'index.html'%}
+
+{%block content%}
+	<h2>Emissões por Combustão estacionária</h2>
+	<form action ="" method ="post">
+	{%csrf_token%}
+	{{form.as_p}}
+	<button type="submit"> Adicionar</button>
+	</form>
+	<a href="{%url inventario:inicia_inventario%}"><button type="submit"> iniciar inventario</button></a>
+		
+{%endblock content%}

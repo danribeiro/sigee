@@ -1,0 +1,23 @@
+{% extends 'index.html'%}
+
+{%block menu%}
+{{block.super}}
+<body>
+	<div id="menu">
+		<ul>
+			<li><a href="/inventario/lista_empresa/">Listar Empresa</a></li>
+		</ul>
+	</div>
+</body>
+<hr>
+{%endblock menu%}
+
+{%block content%}
+
+<u/>
+	<li>
+	    Nome: {{item.nome}}  | Rua: {{item.rua}} | Número: {{item.numero}}</br>
+	    
+	</li>
+</ul>
+{%endblock content%}
