@@ -138,7 +138,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     #######################
-    'south',
+    #'south',
     #'django_extensions',
    #'jqdjangogrid',
     #######################    
