@@ -5,7 +5,7 @@ from forms import FormFonteRAC, FormRAC, FormGas, FormEquipamento
 from models import FonteRAC, RAC, Gas, Equipamento, TotalRAC
 
 
-#vies que manipulam os objetos da tabela ECM
+#viwes que manipulam os objetos da tabela ECM
 def adiciona_rac(request):
 	if request.method=='POST':
 		form=FormRAC(request.POST,request.FILES)
