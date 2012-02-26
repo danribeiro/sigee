@@ -139,7 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     #######################
     'south',
-    'django_extensions',
+    #'django_extensions',
    #'jqdjangogrid',
     #######################    
     'fonte_emissao',
