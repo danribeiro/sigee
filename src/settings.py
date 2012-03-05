@@ -140,7 +140,7 @@ INSTALLED_APPS = (
     #######################
     'south',
     'django_extensions',
-   #'jqdjangogrid',
+    #'jqdjangogrid',
     #######################    
     'fonte_emissao',
     'inventario',

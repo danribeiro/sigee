@@ -9,7 +9,7 @@ from django.http import Http404, HttpResponse
 from fonte_emissao.models import FonteEmissao, EfSetor, SetorAtividade
 from django.forms.models import inlineformset_factory
 
-from report import write_to_pdf
+#from report import write_to_pdf
 
 #views de adição da tabela de Fontes de Emissão
 def adiciona_fonte(request):
